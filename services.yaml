@@ -1,0 +1,16 @@
+---
+ - name: "To add entries to /etc/services file"
+   hosts: all
+   become: true
+   tasks:
+     - name: "Add the entries at the end of the /etc/services file"
+       ansible.builtin.blockinfile:
+        path: /etc/services
+        block: |
+         # Custom services added by Ansible
+         myservice1  12345/tcp
+         myservice2  23456/udp
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - DO NOT EDIT"
+        insertafter: EOF
+        backup: yes
+...
